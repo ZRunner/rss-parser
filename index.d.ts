@@ -25,6 +25,12 @@ declare namespace Parser {
     type?: string;
   }
 
+  interface ItemMedia {
+    url: string;
+    height?: string;
+    width?: string;
+  }
+
   export interface Item {
     link?: string;
     guid?: string;
@@ -39,6 +45,8 @@ declare namespace Parser {
     categories?: string[];
     contentSnippet?: string;
     enclosure?: Enclosure;
+    mediaContent?: ItemMedia;
+    mediaThumbnail?: ItemMedia;
   }
 
   export interface PaginationLinks {
