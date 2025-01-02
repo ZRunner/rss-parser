@@ -28,8 +28,10 @@ declare namespace Parser {
   export interface Item {
     link?: string;
     guid?: string;
+    id?: string;
     title?: string;
     pubDate?: string;
+    author?: string;
     creator?: string;
     summary?: string;
     content?: string;
