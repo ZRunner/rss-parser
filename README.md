@@ -69,63 +69,6 @@ const parser: Parser<CustomFeed, CustomItem> = new Parser({
 })();
 ```
 
-### Web
-> We recommend using a bundler like [webpack](https://webpack.js.org/), but we also provide
-> pre-built browser distributions in the `dist/` folder. If you use the pre-built distribution,
-> you'll need a [polyfill](https://github.com/taylorhakes/promise-polyfill) for Promise support.
-
-Here's an example in the browser using callbacks:
-
-```html
-<script src="/node_modules/rss-parser/dist/rss-parser.min.js"></script>
-<script>
-
-// Note: some RSS feeds can't be loaded in the browser due to CORS security.
-// To get around this, you can use a proxy.
-const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
-
-let parser = new RSSParser();
-parser.parseURL(CORS_PROXY + 'https://www.reddit.com/.rss', function(err, feed) {
-  if (err) throw err;
-  console.log(feed.title);
-  feed.items.forEach(function(entry) {
-    console.log(entry.title + ':' + entry.link);
-  })
-})
-
-</script>
-```
-
-### Upgrading from v2 to v3
-A few minor breaking changes were made in v3. Here's what you need to know:
-
-* You need to construct a `new Parser()` before calling `parseString` or `parseURL`
-* `parseFile` is no longer available (for better browser support)
-* `options` are now passed to the Parser constructor
-* `parsed.feed` is now just `feed` (top-level object removed)
-* `feed.entries` is now `feed.items` (to better match RSS XML)
-
-
-## Output
-Check out the full output format in [test/output/reddit.json](test/output/reddit.json)
-
-```yaml
-feedUrl: 'https://www.reddit.com/.rss'
-title: 'reddit: the front page of the internet'
-description: ""
-link: 'https://www.reddit.com/'
-items:
-    - title: 'The water is too deep, so he improvises'
-      link: 'https://www.reddit.com/r/funny/comments/3skxqc/the_water_is_too_deep_so_he_improvises/'
-      pubDate: 'Thu, 12 Nov 2015 21:16:39 +0000'
-      creator: "John Doe"
-      content: '<a href="http://example.com">this is a link</a> &amp; <b>this is bold text</b>'
-      contentSnippet: 'this is a link & this is bold text'
-      guid: 'https://www.reddit.com/r/funny/comments/3skxqc/the_water_is_too_deep_so_he_improvises/'
-      categories:
-          - funny
-      isoDate: '2015-11-12T21:16:39.000Z'
-```
 
 ##### Notes:
 * The `contentSnippet` field strips out HTML tags and unescapes HTML entities
