@@ -17,6 +17,7 @@ declare namespace Parser {
     readonly maxRedirects?: number;
     readonly customFields?: CustomFields<T, U>;
     readonly timeout?: number;
+    readonly cache?: {get: (key: string) => Promise<any>; set: (key: string, value: any) => Promise<void> }
   }
 
   export interface Enclosure {
